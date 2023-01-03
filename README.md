@@ -106,5 +106,7 @@ Make NeoPixels blink
 ...     time.sleep(1)
 ```
 
+More helpful guides are available at: https://learn.adafruit.com/circuitpython-made-easy-on-circuit-playground-express
+
 
 
