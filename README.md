@@ -1,43 +1,41 @@
 # circuitpython-projects
-Learning Circuit Python and Adafruit Circuit Playground Express
 
-Install AdaFruit apps for the Circuit Playground Bluefruit
+Learning Circuit Python and Adafruit Circuit Playground Bluefruit.
 
-https://learn.adafruit.com/adafruit-circuit-playground-bluefruit
+## Install Circuit Python
 
-Download the latest version of circuitpython for the bluefruit
+Plug the CircuitPlayground BlueFruit into the USB port on your computer.
 
-https://learn.adafruit.com/adafruit-circuit-playground-bluefruit/circuitpython
+Install the CircuitPython and the AdaFruit apps for the [Circuit Playground Bluefruit](https://learn.adafruit.com/adafruit-circuit-playground-bluefruit). Click on the link above and follow the instructions.
 
-Install the Bluefruit libraries on the bluefruit. Note that you don't want to install them all. Just install the individual libraries you need for specific projects because space on the Bluefruit is limited.
+First, [Install the latest version of CircuitPython](https://learn.adafruit.com/adafruit-circuit-playground-bluefruit/circuitpython) on the Bluefruit board.
 
-https://learn.adafruit.com/adafruit-circuit-playground-bluefruit/circuit-playground-bluefruit-circuitpython-libraries
+Next, install the [Bluefruit Circuit Python Libraries](https://learn.adafruit.com/adafruit-circuit-playground-bluefruit/circuit-playground-bluefruit-circuitpython-libraries) on the board. Note that you don't want to install them all. Space on the Bluefruit is limited so just install the individual libraries you need for each project.
 
-If you dowload the ZIP file you will also find example code in it.
+I decided to extract only the minimum Adafruit Circuit Playground libraries, [as specified in the documentation](https://docs.circuitpython.org/projects/circuitplayground/en/latest/#installation), into the board's *CIRCUITPY/lib* folder
 
-For now, I decided to extract only the minimum adafruit circuitplayground libraries, [as specified in the documentation](https://docs.circuitpython.org/projects/circuitplayground/en/latest/#installation), into the *CIRCUITPY/lib* folder
+I installed the following libraries:
+
+* Folders:
+  * adafruit_bus_device
+  * adafruit_circuitplayground
+* Files:
+  * adafruit_thermistor.mpy
+  * adafruit_neopixel.mpy
+  * adafruit_lis3dh.mpy
 
 ![](./Images/extract-libraries.png)
 
+For more information, read the [CircuitPython documentation](https://docs.circuitpython.org/en/latest/README.html) and the [CircuitPlayground BlueFruit library documentation](
+https://docs.circuitpython.org/projects/circuitplayground/en/latest/).
 
-CircuitPython documentation: https://docs.circuitpython.org/en/latest/README.html
+## Install the MU Editor
 
-CircuitPlayground BlueFruit library
-https://docs.circuitpython.org/projects/circuitplayground/en/latest/
+Follow the directions in the following link to [download and install the MU editor](https://learn.adafruit.com/welcome-to-circuitpython/installing-mu-editor). 
 
-Download and install the MU editor
+> **NOTE:** **Do not** use the Ubuntu Software to install it. The MU Editor snap is out-of-date.
 
-https://learn.adafruit.com/welcome-to-circuitpython/installing-mu-editor
-
-Do not use the Ubuntu Software to install it. The Mu snap is old.
-
-From the Mu website: *On Linux, in order for Mu to work with the MicroPython based devices you need to ensure you add yourself to the correct permissions group (usually the dialout or uucp groups). Also make sure that your distribution automatically mounts flash devices, or make sure to mount them manually.*
-
-The MU editor is available as an *appimage*. This is the first time I used an appimage
-
-https://itsfoss.com/use-appimage-linux/
-
-Install the appimage launcher
+The MU editor is available as an [AppImage](https://itsfoss.com/use-appimage-linux/). To install the Mu Editor AppImage, first install the [AppImage Launcher](https://github.com/TheAssassin/AppImageLauncher#appimagelauncher)
 
 ```bash
 sudo add-apt-repository ppa:appimagelauncher-team/stable
@@ -45,68 +43,82 @@ sudo apt update
 sudo apt install appimagelauncher
 ```
 
-(Alternatively, install the *.deb* file available in teh AppImage Launcher Github repo at: https://github.com/TheAssassin/AppImageLauncher/releases)
+Then, download the Mu Editor AppImage file from the [Mu website's downloads page](https://codewith.mu/en/download). Extract the AppImage file from the downloaded TAR archive. Then double-click on it.
 
-Download the Mu appimage file from the downloads page. Extract the appimage file. Then double-click on it.
+The AppImage Launcher automatically launches and handles the installation of the application and integrates it with the Ubuntu launcher. Now it shows up in a standard application search.
 
-The appimage launcher automaticall launches and handles the installation of the appimage application and integrates it with the Ubuntu launcher. Now it shows up in a standard application search.
+Finally, [set up permissions](https://learn.adafruit.com/adafruit-circuit-playground-express/connecting-to-the-serial-console#setting-permissions-on-linux-3027345) so you can access your computer's serial port from the Mu editor. Add your userid to the *dialout* permissions group.
 
-
-Open the REPL on teh BlueFruit
-
-https://learn.adafruit.com/welcome-to-circuitpython/the-repl
-
-https://learn.adafruit.com/adafruit-circuit-playground-express/connecting-to-the-serial-console
-
-
-But, in Linux, need to [set permisisons](https://learn.adafruit.com/adafruit-circuit-playground-express/connecting-to-the-serial-console#setting-permissions-on-linux-3027345)
-
-```
+```bash
 sudo adduser $USER dialout
 ```
-And also [remove the modemmanager](https://learn.adafruit.com/adafruit-circuit-playground-express/connecting-to-the-serial-console#serial-console-issues-or-delays-on-linux-3105120)
+
+Also, [remove the modemmanager](https://learn.adafruit.com/adafruit-circuit-playground-express/connecting-to-the-serial-console#serial-console-issues-or-delays-on-linux-3105120) package to prevent issues connecting to the serial port.
 
 ```
 sudo apt purge modemmanager
 ```
 
-Restart Ubuntu (or log out and back in). This will enable the change in permissions
+Restart Ubuntu, or log out and back in to your user account. This will enable the change in permissions.
 
-Start the MU editor and click on the serial butoon. You should see the REPL
+## Connect to the Bluefruit serial port
+
+Start the [MU editor](https://codewith.mu/) and click on the *Serial* button. You should see the [Serial Console](https://learn.adafruit.com/adafruit-circuit-playground-express/connecting-to-the-serial-console) appear in the MU Editor's interface:
 
 ![](./Images/MU-REPL.png)
 
-Now we can start testing the CircuitPlayground using the REPL.
+Now we can start testing the CircuitPlayground Bluefruit using the [CircuitPython REPL](https://learn.adafruit.com/welcome-to-circuitpython/the-repl). Click the *Return Key* in the Serial Console pane to start the REPL.
 
-Turn off the eight NeoPixels around the CPB board
+## Play with the LEDs
 
+All eight Neopixels are turned off when the board was originally plugged in but they turn on when the REPL is running. They are very bright and I would like to turn them off using the REPL. 
+
+Turn off the ten NeoPixels around the CPB board by entering the following code into the REPL:
+
+```python
+>>> import board
+>>> import neopixel
+>>> pixels = neopixel.NeoPixel(board.NEOPIXEL, 10, auto_write=True)
 ```
+
+The *pixels* object created by the *NeoPixel* class is a list of values representing the RGB values for each pixel. For example, list the current pixel values:
+
+```python
+>>> print(pixels)
+[(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)]
+```
+
+When you  the values, you cause the board to light up the pixels using the values in the list. The *pixel.show()* function forces the board to read the values in the *pixels* list and update the NeoPixels. Since the *pixels* list defaults to all zero values, this turns the NeoPixels off. 
+
+```python
+>>> pixels.show()
+```
+
+Now, each of the ten Neopixels can be addressed by the index list. 
+
+Make the first NeoPixel blink different colors:
+
+```python
+>>> import time
+>>> while True:
+...     pixels[0] = (0,0,1)
+...     time.sleep(1)
+...     pixels[0] = (0,1,0)
+...     time.sleep(1)
+...     pixels[0] = (1,0,0)
+...     time.sleep(1)
+```
+
+See that the first NeoPixel blinks blue, green, then red, and repeats every second.
+
+Stop the loop by entering *CTRL-C* in the serial console.
+
+> **NOTE:** The sleep statement is *required* in the While loop. If you omit the sleep statement, the board runs through the code too fast. If you have print statements in the loop, they will overload the Mu editor's serial console. Then, the Mu editor seems to get hung up and stops accepting inputs from the keyboard. Even if you restart the board to stop the loop, the Mu editor will no longer accept inputs from the keyboard. Close the Mu editor and start it again to solve this issue.
+
+Other LEDs are available on the board. Turn the CircuitPlayground BlueFruit board's red LED on.
+
+```python
 >>> import adafruit_circuitplayground
->>> adafruit_circuitplayground.bluefruit.cpb.pixels.fill(0x000000)
-```
-
-Turn the CPB LED on
-
-```
 >>> adafruit_circuitplayground.bluefruit.cpb.red_led = True
 ```
-
-Make NeoPixels blink
-
-```
->>> from adafruit_circuitplayground.bluefruit import cpb
->>> import time
->>> time.sleep(1)
->>> while True:
-...     cpb.pixels.fill(0x000001)
-...     time.sleep(1)
-...     cpb.pixels.fill(0x000100)
-...     time.sleep(1)
-...     cpb.pixels.fill(0x010000)
-...     time.sleep(1)
-```
-
-More helpful guides are available at: https://learn.adafruit.com/circuitpython-made-easy-on-circuit-playground-express
-
-
 
