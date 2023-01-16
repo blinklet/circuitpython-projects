@@ -1,6 +1,6 @@
-# circuitpython-projects
+# CircuitPython Projects
 
-Learning Circuit Python and Adafruit Circuit Playground Bluefruit.
+This repository contains notes and code I created while learning Circuit Python using the Adafruit Circuit Playground Bluefruit.
 
 ## Install Circuit Python
 
@@ -10,7 +10,7 @@ Follow the directions in the following links to [install the CircuitPython and t
 
 ### Choose libraries
 
-Space on the Bluefruit is limited so just install the specific libraries you need for each project. For now, extract the minimum Adafruit Circuit Playground libraries, [as specified in the documentation](https://docs.circuitpython.org/projects/circuitplayground/en/latest/#installation), into the board's *CIRCUITPY/lib* folder.
+Space on the Bluefruit is limited so just install the specific libraries you need for each project. For now, extract the minimum Adafruit Circuit Playground libraries, [as specified in the documentation](https://docs.circuitpython.org/projects/circuitplayground/en/latest/#installation).
 
 Install the following libraries:
 
@@ -22,12 +22,16 @@ Install the following libraries:
   * adafruit_neopixel.mpy
   * adafruit_lis3dh.mpy
 
-![](./Images/extract-libraries.png)
+The libraries are installed by copying library files into the board's *CIRCUITPY/lib* folder.
+
+![Extract CircuitPython libraries](./Images/extract-libraries.png)
 
 For more information, read the [CircuitPython documentation](https://docs.circuitpython.org/en/latest/README.html) and the [CircuitPlayground BlueFruit library documentation](
 https://docs.circuitpython.org/projects/circuitplayground/en/latest/).
 
-## Install the u Editor
+## Install the Mu Editor
+
+Adafruit recommends using the [Mu editor](https://codewith.mu/) with its microcontroller boards. 
 
 Follow the directions in the following link to [download and install the Mu editor](https://learn.adafruit.com/welcome-to-circuitpython/installing-mu-editor). 
 
@@ -44,6 +48,8 @@ sudo apt install appimagelauncher
 Then, download the Mu Editor AppImage file from the [Mu website's downloads page](https://codewith.mu/en/download). Extract the AppImage file from the downloaded TAR archive. Then double-click on the AppImage file.
 
 The AppImage Launcher automatically installs the application and integrates it with the Ubuntu launcher. Now it shows up in a standard application search.
+
+Remember to [set the editor mode](https://codewith.mu/en/tutorials/1.2/modes) to *CircuitPython*.
 
 ### Fix permissions
 
@@ -63,20 +69,22 @@ Restart Ubuntu, or log out and back in to your user account. This will enable th
 
 ## Connect to the Bluefruit serial port
 
-Start the [Mu editor](https://codewith.mu/) and click on the *Serial* button. You should see the [Serial Console](https://learn.adafruit.com/adafruit-circuit-playground-express/connecting-to-the-serial-console) appear in the Mu Editor's interface:
+Start the Mu editor and click on the *Serial* button. You should see the [Serial Console](https://learn.adafruit.com/adafruit-circuit-playground-express/connecting-to-the-serial-console) appear in the Mu Editor's interface:
 
 ![](./Images/MU-REPL.png)
 
-## Running code and the REPL
+For more information, see the [Mu editor documentation regarding Adafruit boards](https://codewith.mu/en/tutorials/1.2/adafruit).
+
+## Running code and using the REPL
 
 Open the *code.py* file on the Bluefruit by pressing the *Load* button on the Mu editor and selecting the *code.py* file. If you are using the board for the first time, you will see a simple "Hello World" program in the *code.py* file. It prints one line of text in the serial console, then stops.
 
 By default, the Bluefruit will automatically run changes to the *code.py* file when it is saved, so your updated code starts running as soon as you save the file.
 
-Use the *Enter* key, *Ctrl-D*, abd *Ctrl-C* to control whether the serial console is running the program stored on the board or running code from the REPL.
+Use the *Enter* key, *Ctrl-D*, and *Ctrl-C* to control whether the serial console is running the program stored on the board or is running code from the REPL.
 
 * To run the *code.py* program again, press *Ctrl-D*.
-* To switch to the Python REPL, press *Enter*.
+* To switch to the CircuitPython REPL, press *Enter*.
 * To switch from the REPL to running the *code.py* program, press *Ctrl-D*.
 * If you are running a loop in the *code.py* program and want to stop it and switch to the REPL, press *Ctrl-C*, and then *Enter*.
 * If you are running a loop in the REPL and want to exit the loop and return to the REPL, press *Ctrl-C*.
@@ -111,7 +119,7 @@ When you  the values, you cause the board to light up the pixels using the value
 
 The *pixels.show* function is most useful if you set value of the auto_write parameter to False when you create the *pixels* object. In that case, the board will let you change the value of multiple NeoPixels but will not change the NeoPixels until you run the *pixels.show()* function.
 
-You can decide for yourself if you want all the pixels to update every time you change any pixel value, or if you want to trigger an update separately with the show function by choosing whether the value of the *pixels* object's *auto_write* parameter is *True* or *False*.
+You can decide for yourself if you want all the pixels to update every time you change any pixel value, or if you want to trigger an update separately with the show function by choosing whether the value of the *pixels* object's *auto_write* parameter is *True* or *False*. Note that the default value for *auto_write* is *True*.
 
 After executing the statements shown above, each of the Bluefruit board's ten Neopixels can be addressed by the *pixels* list index.
 
@@ -149,6 +157,8 @@ Other LEDs are available on the board. Turn the CircuitPlayground BlueFruit boar
 >>> adafruit_circuitplayground.bluefruit.cpb.red_led = True
 ```
 
+> **NOTE:** you may see the error message, "ValueError: NEOPIXEL in use" when you import the *adafruit_circuitplayground* library module. Fix this issue by clearing the memory. To clear the REPL memory, press *Ctrl-D*, then *Ctrl-C*, then *Enter*. Now you can start again with a blank slate.
+
 See that the red LED is on. Then:
 
 ```python
@@ -157,5 +167,90 @@ See that the red LED is on. Then:
 ```
 
 See that the red LED is off.
+
+## Writing programs
+
+If you find your experiments need more than a few lines of code, it is probably better to edit the *code.py* file on the Circuit Playground Bluefruit. See the CircuitPython documentation about [Creating and Editing Code](https://learn.adafruit.com/adafruit-circuit-playground-express/creating-and-editing-code) for more details.
+
+In the Mu editor, load the *code.py* program and change it to the following (which is [inspired by the CircuitPython LED documentation](https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino/circuitpython-internal-rgb-led#making-rainbows-because-who-doesnt-love-em-2984015)). This program will make the NeoPixels cycle through a rainbow color effect:
+
+```python
+import board
+import neopixel
+from rainbowio import colorwheel
+
+pixels = neopixel.NeoPixel(board.NEOPIXEL, 10, brightness=0.2)
+i = 0
+while True:
+    for i in range(256): # run from 0 to 255
+        pixels.fill(colorwheel(i))
+        print(pixels[0])
+        time.sleep(0.1)
+```
+
+After pressing the Mu editor's *Save* button, the program should start to run. If it does not, click on the serial console window pane and press *Ctrl-C*, then *Ctrl-D* to exit the REPL and start the program.
+
+The program gradually changes the value of each NeoPixel so they cycle through the colors of the rainbow. The program also outputs the color values used by the first NeoPixel to the serial console so you can see what values are changing.
+
+To stop the program running, click on the serial console window pane and press *Ctrl-C*.
+
+## Go mobile
+
+After creating a program that does what you like, you may wish to carry the Bluefruit around without requiring it to be tethered to your computer. To do this, you must first eject the Bluefruit, then disconnect it from the USB port and connect it to a [battery power supply](https://www.adafruit.com/category/889).
+
+### Eject the board
+
+To eject the Bluefruit, close the Mu editor. Then, open the Ubuntu Files application and click on the *Eject* icon next to the *CIRCUITPY* drive. This procedure ensures you do not [corrupt the Bluefruit's file system](https://learn.adafruit.com/adafruit-circuit-playground-bluefruit/creating-and-editing-code#editing-code-2977443).
+
+### Battery
+
+Connect your [battery pack](https://www.adafruit.com/product/727) to the Bluefruit using the 2-Pin JST connector. The code should start running as soon as you turn on the power. Now you can take your Bluefruit anywhere to demonstrate your cool code.
+
+> **NOTE:** To make it easier to remove the JST connector from the board, cut off the two small tabs on the left and right sides of the battery pack's JST connector before you insert it onto the board. The tabs are very small and are easy to trim with a sharp knife.
+
+## Experimenting with other libraries
+
+Add new libraries when needed. Some libraries can make common operations easier. For example, if you want to create an animated display composed of different colored NeoPixels moving around the Bluefruit, you could manually operate each NeoPixel as follows:
+
+```pixel
+import time
+import math
+from adafruit_circuitplayground import cp
+from rainbowio import colorwheel
+
+pix_count = 10
+pixels = cp.pixels
+pixels.brightness = 0.2
+
+while True:
+    for pix in range(pix_count-1,-1,-1): # backwards from pix_count to 0
+        for colr in range(0,255,math.ceil(255/pix_count)): # a range of pix_count values
+            pixels[pix] = (colorwheel(colr))
+            pix = pix -1 
+            time.sleep(0.01)
+```
+
+In this example, the [*adafruit_led_animation* library](https://docs.circuitpython.org/projects/led-animation/en/latest/api.html#adafruit-led-animation-animation-rainbowchase) will automatically create animations and has a built-in Rainbow Chase animation that will perform the same task as the code listed above, in a simpler way.
+
+First, you need to add the new library. To add a library, open the CircuitPython archive you downloaded earlier or [download it again](https://learn.adafruit.com/adafruit-circuit-playground-bluefruit/circuit-playground-bluefruit-circuitpython-libraries). Go to the *lib* subdirectory and extract the necessary libraries from the archive to to the Bluefruit's *CIRCUITPY/lib* directory.
+
+```python
+from adafruit_circuitplayground import cp
+from adafruit_led_animation.animation.rainbowchase import RainbowChase
+
+cp.pixels.brightness = 0.02
+rainbow = RainbowChase(cp.pixels, speed=0.02, size=1, spacing=0, reverse=True, step=25)
+while True:
+    rainbow.animate()
+```
+As you can see, the *adafruit_led_animation* library creates a similar animation with less code. The led_animation library can also support much more complex configurations of NeoPixels.
+
+
+
+
+
+
+
+
 
 
