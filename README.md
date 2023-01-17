@@ -212,7 +212,7 @@ Connect your [battery pack](https://www.adafruit.com/product/727) to the Bluefru
 
 Add new libraries when needed. Some libraries can make common operations easier. For example, if you want to create an animated display composed of different colored NeoPixels moving around the Bluefruit, you could manually operate each NeoPixel as follows:
 
-```pixel
+```python
 import time
 import math
 from adafruit_circuitplayground import cp
@@ -223,8 +223,8 @@ pixels = cp.pixels
 pixels.brightness = 0.2
 
 while True:
-    for pix in range(pix_count-1,-1,-1): # backwards from pix_count to 0
-        for colr in range(0,255,math.ceil(255/pix_count)): # a range of pix_count values
+    for pix in range(pix_count-1,-1,-1): 
+        for colr in range(0,255,math.ceil(255/pix_count)): 
             pixels[pix] = (colorwheel(colr))
             pix = pix -1 
             time.sleep(0.01)
@@ -232,7 +232,7 @@ while True:
 
 In this example, the [*adafruit_led_animation* library](https://docs.circuitpython.org/projects/led-animation/en/latest/api.html#adafruit-led-animation-animation-rainbowchase) will automatically create animations and has a built-in Rainbow Chase animation that will perform the same task as the code listed above, in a simpler way.
 
-First, you need to add the new library. To add a library, open the CircuitPython archive you downloaded earlier or [download it again](https://learn.adafruit.com/adafruit-circuit-playground-bluefruit/circuit-playground-bluefruit-circuitpython-libraries). Go to the *lib* subdirectory and extract the necessary libraries from the archive to to the Bluefruit's *CIRCUITPY/lib* directory.
+To add a new library, open the CircuitPython archive you downloaded earlier or [download it again](https://learn.adafruit.com/adafruit-circuit-playground-bluefruit/circuit-playground-bluefruit-circuitpython-libraries). Go to the *lib* subdirectory and extract the necessary libraries from the archive to to the Bluefruit's *CIRCUITPY/lib* directory.
 
 ```python
 from adafruit_circuitplayground import cp
@@ -240,10 +240,11 @@ from adafruit_led_animation.animation.rainbowchase import RainbowChase
 
 cp.pixels.brightness = 0.02
 rainbow = RainbowChase(cp.pixels, speed=0.02, size=1, spacing=0, reverse=True, step=25)
+
 while True:
     rainbow.animate()
 ```
-As you can see, the *adafruit_led_animation* library creates a similar animation with less code. The led_animation library can also support much more complex configurations of NeoPixels.
+As you can see, the *adafruit_led_animation* library creates a similar animation with less code. This animation library can also support much more complex configurations of NeoPixels.
 
 
 
